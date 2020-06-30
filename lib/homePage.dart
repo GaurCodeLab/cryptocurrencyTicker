@@ -220,7 +220,7 @@ class _HomePageState extends State<HomePage> {
               margin: EdgeInsets.all(7.0),
               child: AnimationLimiter(
                 child: ListView.builder(
-                    itemCount: 20,
+                    itemCount: 30,
                     itemBuilder: (BuildContext c, int index) {
                       return AnimationConfiguration.staggeredList(
                         position: index,
@@ -278,14 +278,14 @@ class _HomePageState extends State<HomePage> {
                                             padding: const EdgeInsets.all(8.0),
                                             child: Row(
                                               children: <Widget>[
-                                                widget.listof[index]['7d'][
+                                                widget.listof[index]['365d'][
                                                             'price_change_pct'] ==
                                                         null
                                                     ? Text("NA")
                                                     : Text(
-                                                        "Wk chng : ${widget.listof[index]['7d']['price_change_pct']}%"),
+                                                        "365DY chng : ${widget.listof[index]['365d']['price_change_pct']}%".toString()),
                                                 double.parse(widget.listof[
-                                                                index]['7d'][
+                                                                index]['365d'][
                                                             'price_change_pct']) <
                                                         0
                                                     ? Icon(
@@ -303,15 +303,15 @@ class _HomePageState extends State<HomePage> {
                                           ),
                                           Row(
                                             children: <Widget>[
-                                              widget.listof[index]['30d'][
+                                              widget.listof[index]['ytd'][
                                                           'price_change_pct'] ==
                                                       null
                                                   ? Text("NA")
                                                   : Text(
-                                                      "Mnth chng : ${widget.listof[index]['30d']['price_change_pct']}%"
+                                                      "clndrYr chng : ${widget.listof[index]['ytd']['price_change_pct']}%"
                                                           .toString()),
                                               double.parse(widget.listof[index]
-                                                              ['30d'][
+                                                              ['ytd'][
                                                           'price_change_pct']) <
                                                       0
                                                   ? Icon(
