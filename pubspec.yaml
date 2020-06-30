@@ -1,5 +1,5 @@
-name: complex_json_parsing
-description: A new Flutter application.
+name: CryptoCurrencyTicker
+description: Fetches data from nomics open api .
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
