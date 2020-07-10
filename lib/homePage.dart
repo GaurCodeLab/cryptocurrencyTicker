@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
 
 class HomePage extends StatefulWidget {
   List listof;
@@ -26,23 +27,27 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blueGrey[800],
+      backgroundColor: Colors.blueGrey[200],
       appBar: AppBar(
         title: Center(
           child: Text("Crypto Ticker"),
         ),
-        backgroundColor: Colors.blueGrey,
+        backgroundColor: Colors.blueGrey[400],
       ),
       body: AnimationLimiter(
         child: ListView(
           children: <Widget>[
             Center(
-              child: Text(
-                "Trending Cryptcurrencies",
-                style: TextStyle(
+              child: ColorizeAnimatedTextKit(
+                repeatForever: true,
+                text: ["Trending Cryptocurrencies"],
+                colors: [Colors.purple, Colors.blue, Colors.yellow, Colors.red],
+                textStyle: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 22,
-                    color: Colors.white70),
+                    fontSize: 26,
+                    color: Colors.white),
+                textAlign: TextAlign.center,
+                alignment: AlignmentDirectional.topStart,
               ),
             ),
             Container(
@@ -62,7 +67,7 @@ class _HomePageState extends State<HomePage> {
                             child: Container(
                               width: 300.0,
                               child: Card(
-                                color: Colors.blueGrey[600],
+                                color: Colors.blueGrey[500],
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(15.0)),
                                 elevation: 7.0,
@@ -76,11 +81,29 @@ class _HomePageState extends State<HomePage> {
                                         child: double.parse(widget.listof[index]
                                                     ['rank']) <=
                                                 10
-                                            ? Text(
-                                                widget.listof[index]['symbol'],
-                                                style: TextStyle(
-                                                    color: Colors.black),
-                                              )
+                                            ? ColorizeAnimatedTextKit(
+                                                totalRepeatCount: 10,
+                                                text: [
+                                                  widget.listof[index]['symbol']
+                                                      .toString(),
+                                                ],
+                                                textStyle: TextStyle(
+                                                    fontSize: 18.0,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                                colors: [
+                                                  Colors.purple,
+                                                  Colors.blue,
+                                                  Colors.pink,
+                                                  Colors.red,
+                                                  Colors.yellow,
+                                                  Colors.orange
+                                                ])
+                                            // ? Text(
+                                            //     widget.listof[index]['symbol'],
+                                            //     style: TextStyle(
+                                            //         color: Colors.black),
+                                            //   )
                                             : null,
                                       ),
                                     ),
@@ -292,7 +315,7 @@ class _HomePageState extends State<HomePage> {
                                                                     .bold)),
                                                     TextSpan(
                                                         text:
-                                                            "1 ${widget.listof[index]['symbol']} =  ${double.parse(widget.listof[index]['price']).toStringAsFixed(3)}")
+                                                            "1 ${widget.listof[index]['symbol']} =  \$${double.parse(widget.listof[index]['price']).toStringAsFixed(3)}")
                                                   ]))
                                               //  Text(
                                               //   "Current Price : \$${double.parse(widget.listof[index]['price']).toStringAsFixed(3)} ",
