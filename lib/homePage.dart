@@ -257,10 +257,16 @@ class _HomePageState extends State<HomePage> {
                                           SizedBox(
                                             height: 7.0,
                                           ),
-                                          Text(
-                                            widget.listof[index]['name'],
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold),
+                                          Container(
+                                            width: 90.0,
+                                            child: Text(
+                                              widget.listof[index]['name'],
+                                              textAlign: TextAlign.center,
+                                              overflow: TextOverflow.ellipsis,
+                                              maxLines: 3,
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold),
+                                            ),
                                           ),
                                         ],
                                       ),
@@ -270,22 +276,73 @@ class _HomePageState extends State<HomePage> {
                                       child: Column(
                                         children: <Widget>[
                                           Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Text(
-                                              "Current Price : \$${double.parse(widget.listof[index]['price']).toStringAsFixed(3)} ",
-                                              textAlign: TextAlign.start,
-                                            ),
-                                          ),
+                                              padding:
+                                                  const EdgeInsets.all(5.0),
+                                              child: RichText(
+                                                  text: TextSpan(
+                                                      style: TextStyle(
+                                                          fontSize: 14.0,
+                                                          color: Colors.black),
+                                                      children: <TextSpan>[
+                                                    TextSpan(
+                                                        text: "CurrentPrice : ",
+                                                        style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold)),
+                                                    TextSpan(
+                                                        text:
+                                                            "1 ${widget.listof[index]['symbol']} =  ${double.parse(widget.listof[index]['price']).toStringAsFixed(3)}")
+                                                  ]))
+                                              //  Text(
+                                              //   "Current Price : \$${double.parse(widget.listof[index]['price']).toStringAsFixed(3)} ",
+                                              //   textAlign: TextAlign.center,
+                                              // ),
+                                              ),
                                           Padding(
-                                            padding: const EdgeInsets.all(8.0),
+                                            padding: const EdgeInsets.only(
+                                                top: 8.0,
+                                                bottom: 8.0,
+                                                left: 25.0,
+                                                right: 8.0),
                                             child: Row(
                                               children: <Widget>[
                                                 widget.listof[index]['7d'] ==
                                                         null
-                                                    ? Text(" Wk Chng : NA")
-                                                    : Text(
-                                                        "Wk chng : ${double.parse(widget.listof[index]['7d']['price_change_pct']).toStringAsFixed(3)}%"
-                                                            .toString()),
+                                                    ? Text(
+                                                        " Wk Chng : NA",
+                                                        textAlign:
+                                                            TextAlign.center,
+                                                      )
+                                                    : RichText(
+                                                        text: new TextSpan(
+                                                            style:
+                                                                new TextStyle(
+                                                              fontSize: 14.0,
+                                                              color:
+                                                                  Colors.black,
+                                                            ),
+                                                            children: <
+                                                                TextSpan>[
+                                                            new TextSpan(
+                                                                text:
+                                                                    'Wk Chng :',
+                                                                style: new TextStyle(
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold)),
+                                                            new TextSpan(
+                                                                text:
+                                                                    "${double.parse(widget.listof[index]['7d']['price_change_pct']).toStringAsFixed(3)}%",
+                                                                style: new TextStyle(
+                                                                    fontSize:
+                                                                        16.0))
+                                                          ])),
+                                                // : Text(
+                                                //     "Wk chng : ${double.parse(widget.listof[index]['7d']['price_change_pct']).toStringAsFixed(3)}%"
+                                                //         .toString(),
+                                                //     textAlign:
+                                                //         TextAlign.center),
                                                 widget.listof[index]['7d'] !=
                                                         null
                                                     ? double.parse(widget
@@ -316,10 +373,37 @@ class _HomePageState extends State<HomePage> {
                                             children: <Widget>[
                                               widget.listof[index]['30d'] ==
                                                       null
-                                                  ? Text("Mnth chng : NA")
-                                                  : Text(
-                                                      "Mnth chng : ${double.parse(widget.listof[index]['30d']['price_change_pct']).toStringAsFixed(3)}%"
-                                                          .toString()),
+                                                  ? Text(
+                                                      "Mnth chng : NA",
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                    )
+                                                  : RichText(
+                                                      text: TextSpan(
+                                                        style: TextStyle(
+                                                            fontSize: 14.0,
+                                                            color:
+                                                                Colors.black),
+                                                        children: <TextSpan>[
+                                                          TextSpan(
+                                                              text:
+                                                                  "Mnth Chng : ",
+                                                              style: TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold)),
+                                                          TextSpan(
+                                                              text: "${double.parse(widget.listof[index]['30d']['price_change_pct']).toStringAsFixed(3)}%"
+                                                                  .toString())
+                                                        ],
+                                                      ),
+                                                    ),
+                                              // : Text(
+                                              //     "Mnth chng : ${double.parse(widget.listof[index]['30d']['price_change_pct']).toStringAsFixed(3)}%"
+                                              //         .toString(),
+                                              //     textAlign:
+                                              //         TextAlign.center,
+                                              //   ),
                                               widget.listof[index]['30d'] !=
                                                       null
                                                   ? double.parse(widget.listof[
