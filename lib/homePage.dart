@@ -4,6 +4,7 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
 class HomePage extends StatefulWidget {
   List listof;
+
   HomePage(this.listof);
 
   @override
@@ -37,7 +38,7 @@ class _HomePageState extends State<HomePage> {
           children: <Widget>[
             Center(
               child: Text(
-                "Top 10 Cryptcurrencies",
+                "Trending Cryptcurrencies",
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 22,
@@ -70,7 +71,7 @@ class _HomePageState extends State<HomePage> {
                                     Container(
                                       padding: EdgeInsets.only(top: 15.0),
                                       child: CircleAvatar(
-                                        radius: 25.0,
+                                        radius: 30.0,
                                         backgroundColor: Colors.greenAccent,
                                         child: double.parse(widget.listof[index]
                                                     ['rank']) <=
@@ -86,7 +87,7 @@ class _HomePageState extends State<HomePage> {
                                     SizedBox(height: 8.0),
                                     Container(
                                       child: Text(
-                                        "1 ${widget.listof[index]['symbol']} = \$${widget.listof[index]['price']}",
+                                        "1 ${widget.listof[index]['symbol']} = \$${double.parse(widget.listof[index]['price']).toStringAsFixed(2)}",
                                         style: TextStyle(color: Colors.white),
                                       ),
                                     ),
@@ -133,7 +134,7 @@ class _HomePageState extends State<HomePage> {
                                                           width: 5.0,
                                                         ),
                                                         Text(
-                                                          "${widget.listof[index]['7d']['market_cap_change_pct']}%",
+                                                          "${double.parse(widget.listof[index]['7d']['market_cap_change_pct']).toStringAsFixed(2)}%",
                                                           style: TextStyle(
                                                               color: Colors
                                                                   .white70),
@@ -170,7 +171,7 @@ class _HomePageState extends State<HomePage> {
                                                     child: Row(
                                                       children: <Widget>[
                                                         Text(
-                                                          "${widget.listof[index]['7d']['volume_change_pct']}%",
+                                                          "${double.parse(widget.listof[index]['7d']['volume_change_pct']).toStringAsFixed(2)}%",
                                                           style: TextStyle(
                                                               color: Colors
                                                                   .white70),
@@ -220,7 +221,8 @@ class _HomePageState extends State<HomePage> {
               margin: EdgeInsets.all(7.0),
               child: AnimationLimiter(
                 child: ListView.builder(
-                    itemCount: 30,
+                    itemCount:
+                        widget.listof.length == null ? 0 : widget.listof.length,
                     itemBuilder: (BuildContext c, int index) {
                       return AnimationConfiguration.staggeredList(
                         position: index,
@@ -270,7 +272,7 @@ class _HomePageState extends State<HomePage> {
                                           Padding(
                                             padding: const EdgeInsets.all(8.0),
                                             child: Text(
-                                              "Current Price : \$${widget.listof[index]['price']} ",
+                                              "Current Price : \$${double.parse(widget.listof[index]['price']).toStringAsFixed(3)} ",
                                               textAlign: TextAlign.start,
                                             ),
                                           ),
@@ -278,52 +280,66 @@ class _HomePageState extends State<HomePage> {
                                             padding: const EdgeInsets.all(8.0),
                                             child: Row(
                                               children: <Widget>[
-                                                widget.listof[index]['365d'][
-                                                            'price_change_pct'] ==
+                                                widget.listof[index]['7d'] ==
                                                         null
-                                                    ? Text("NA")
+                                                    ? Text(" Wk Chng : NA")
                                                     : Text(
-                                                        "365DY chng : ${widget.listof[index]['365d']['price_change_pct']}%".toString()),
-                                                double.parse(widget.listof[
-                                                                index]['365d'][
-                                                            'price_change_pct']) <
-                                                        0
-                                                    ? Icon(
-                                                        Icons.arrow_drop_down,
-                                                        color: Colors.red,
-                                                        size: 35,
-                                                      )
+                                                        "Wk chng : ${double.parse(widget.listof[index]['7d']['price_change_pct']).toStringAsFixed(3)}%"
+                                                            .toString()),
+                                                widget.listof[index]['7d'] !=
+                                                        null
+                                                    ? double.parse(widget
+                                                                        .listof[
+                                                                    index]['7d']
+                                                                [
+                                                                'price_change_pct']) <
+                                                            0
+                                                        ? Icon(
+                                                            Icons
+                                                                .arrow_drop_down,
+                                                            color: Colors.red,
+                                                            size: 35,
+                                                          )
+                                                        : Icon(
+                                                            Icons.arrow_drop_up,
+                                                            color: Colors.green,
+                                                            size: 35,
+                                                          )
                                                     : Icon(
-                                                        Icons.arrow_drop_up,
-                                                        color: Colors.green,
-                                                        size: 35,
-                                                      ),
+                                                        Icons.error_outline,
+                                                        color: Colors.red,
+                                                      )
                                               ],
                                             ),
                                           ),
                                           Row(
                                             children: <Widget>[
-                                              widget.listof[index]['ytd'][
-                                                          'price_change_pct'] ==
+                                              widget.listof[index]['30d'] ==
                                                       null
-                                                  ? Text("NA")
+                                                  ? Text("Mnth chng : NA")
                                                   : Text(
-                                                      "clndrYr chng : ${widget.listof[index]['ytd']['price_change_pct']}%"
+                                                      "Mnth chng : ${double.parse(widget.listof[index]['30d']['price_change_pct']).toStringAsFixed(3)}%"
                                                           .toString()),
-                                              double.parse(widget.listof[index]
-                                                              ['ytd'][
-                                                          'price_change_pct']) <
-                                                      0
-                                                  ? Icon(
-                                                      Icons.arrow_drop_down,
-                                                      color: Colors.red,
-                                                      size: 35,
-                                                    )
+                                              widget.listof[index]['30d'] !=
+                                                      null
+                                                  ? double.parse(widget.listof[
+                                                                  index]['30d'][
+                                                              'price_change_pct']) <
+                                                          0
+                                                      ? Icon(
+                                                          Icons.arrow_drop_down,
+                                                          color: Colors.red,
+                                                          size: 35,
+                                                        )
+                                                      : Icon(
+                                                          Icons.arrow_drop_up,
+                                                          color: Colors.green,
+                                                          size: 35,
+                                                        )
                                                   : Icon(
-                                                      Icons.arrow_drop_up,
-                                                      color: Colors.green,
-                                                      size: 35,
-                                                    ),
+                                                      Icons.error_outline,
+                                                      color: Colors.red,
+                                                    )
                                             ],
                                           ),
                                         ],
