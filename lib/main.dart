@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 
 import 'homePage.dart';
 
-const String apikey = 'key=8114dc75f1144d09d2201f6fd20d5186';
+const String apikey = 'Your apikey here';
 void main() async {
   List listof = await getAllData();
 
